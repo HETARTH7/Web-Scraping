@@ -16,7 +16,7 @@ def create_custom_hn(links, subtext):
     hn = []
     for index, item in enumerate(links):
         title = item.getText()
-        href = item.get('href', None)
+        href = item.span.a.get('href', None)[10:]
         votes = subtext[index].select('.score')
         if len(votes):
             points = int(votes[0].getText().replace(' points', ''))
@@ -25,4 +25,4 @@ def create_custom_hn(links, subtext):
     return sort_stories_by_votes(hn)
 
 
-pprint.pprint((create_custom_hn(links, subtext)))
+pprint.pprint(create_custom_hn(links, subtext))
